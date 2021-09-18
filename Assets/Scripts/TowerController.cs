@@ -14,9 +14,9 @@ public class TowerController : MonoBehaviour
 {
 	public GameObject CylinderPrefab;
 
-	public float RotateSpeed = 1.5f;
+	public ScoreController ScoreController;
 
-	public Text Score;
+	public float RotateSpeed = 1.5f;
 
 	private float _mouseXPreviousPos;
 
@@ -28,13 +28,10 @@ public class TowerController : MonoBehaviour
 
 	private Tuple<Color, Color> Colors;
 
-	private uint _score = 0;
-
 	private bool _mousePress = false;
 
 	private Vector3 _eulerAngles;
 	private Vector3 _newEulerAngles;
-
 	//--------------------------------------------------------------------------
 
 	private void Awake()
@@ -95,6 +92,7 @@ public class TowerController : MonoBehaviour
 		Tower tower = cylinder.GetComponent<Tower>();
 		tower.Init(color, _towerCount * 0.001f);
 		tower.DestructorEnter.AddListener(OnTowerDestruct);
+		tower.DestructorEnter.AddListener(ScoreController.OnTowerDectructed);
 	}
 	//--------------------------------------------------------------------------
 
@@ -109,9 +107,6 @@ public class TowerController : MonoBehaviour
 		{
 			Destroy(transform.GetChild(0).gameObject);
 		}
-
-		_score += 1;
-		Score.text = _score.ToString();
 	}
 	//--------------------------------------------------------------------------
 }
