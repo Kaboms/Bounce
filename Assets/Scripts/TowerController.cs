@@ -16,10 +16,6 @@ public class TowerController : MonoBehaviour
 
 	public ScoreController ScoreController;
 
-	public float RotateSpeed = 1.5f;
-
-	private float _mouseXPreviousPos;
-
 	private Vector3 _spawnPosition;
 
 	private uint _towerCount = 8;
@@ -27,18 +23,11 @@ public class TowerController : MonoBehaviour
 	private float _colorChangeFactor = 0;
 
 	private Tuple<Color, Color> Colors;
-
-	private bool _mousePress = false;
-
-	private Vector3 _eulerAngles;
-	private Vector3 _newEulerAngles;
 	//--------------------------------------------------------------------------
 
 	private void Awake()
 	{
 		_spawnPosition = Vector3.zero;
-		_eulerAngles = transform.eulerAngles;
-		_newEulerAngles = _eulerAngles;
 
 		Colors = Tuple.Create<Color, Color>(Random.ColorHSV(0f, 1f), Random.ColorHSV(0f, 1f));
 	}
@@ -48,27 +37,6 @@ public class TowerController : MonoBehaviour
 	{
 		for (int i = 0; i < _towerCount; ++i)
 			SpawnTower();
-	}
-	//--------------------------------------------------------------------------
-
-	private void Update()
-	{
-		_mousePress = Input.GetMouseButton(0);
-
-		if (Input.GetMouseButtonDown(0))
-			_mouseXPreviousPos = Input.mousePosition.x;
-	}
-	//--------------------------------------------------------------------------
-
-	private void FixedUpdate()
-	{
-		if (_mousePress)
-		{
-			_eulerAngles.y += ((_mouseXPreviousPos - Input.mousePosition.x) / Screen.width) * RotateSpeed;
-			_mouseXPreviousPos = Input.mousePosition.x;
-		}
-
-		transform.eulerAngles = _eulerAngles;
 	}
 	//--------------------------------------------------------------------------
 

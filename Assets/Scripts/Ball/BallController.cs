@@ -9,7 +9,10 @@ public class BallController : MonoBehaviour
 {
 	public UnityEvent DeathEvent;
 
+	public float RotateSpeed = 1.5f;
+
 	private bool _immortal = false;
+
 	// Delay disable immortality when ends fire mode
 	private Timer _immortalDisableTimer;
 
@@ -25,6 +28,9 @@ public class BallController : MonoBehaviour
 	private const float _cameraVerticalOffset = 3;
 
 	private bool _gameOver = false;
+
+	private float _mouseXPreviousPos;
+	private bool _mousePress = false;
 	//--------------------------------------------------------------------------
 
 	private void Awake()
@@ -47,7 +53,15 @@ public class BallController : MonoBehaviour
 	private void Update()
 	{
 		if (_gameOver && Input.GetMouseButtonDown(0))
+		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			return;
+		}
+
+		_mousePress = Input.GetMouseButton(0);
+
+		if (Input.GetMouseButtonDown(0))
+			_mouseXPreviousPos = Input.mousePosition.x;
 	}
 	//--------------------------------------------------------------------------
 
@@ -57,6 +71,15 @@ public class BallController : MonoBehaviour
 			return;
 
 		MotionControl();
+
+		if (_mousePress)
+		{
+			float angle = ((_mouseXPreviousPos - Input.mousePosition.x) / Screen.width) * RotateSpeed;
+			_mouseXPreviousPos = Input.mousePosition.x;
+
+			transform.RotateAround(Vector3.zero, Vector3.up, -angle);
+			_camera.transform.RotateAround(Vector3.zero, Vector3.up, -angle);
+		}
 	}
 	//--------------------------------------------------------------------------
 
@@ -123,9 +146,9 @@ public class BallController : MonoBehaviour
 	public void SetImmortal(bool mode)
 	{
 		if (mode)
-		 	_immortal = true;
+			_immortal = true;
 		else
-		 	_immortalDisableTimer.StartTimer();
+			_immortalDisableTimer.StartTimer();
 	}
 	//--------------------------------------------------------------------------
 	//--------------------------------------------------------------------------
