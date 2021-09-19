@@ -39,18 +39,7 @@ public class FireModificatorBehaviour : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("TowerDestructor"))
-		{
-			++_towerDestructed;
-
-			Color newColor = Color.Lerp(_standartColor, FireColor, _towerDestructed * (1f / RequiredTowerDestruct));
-			_meshRenderer.material.color = newColor;
-			_trailRenderer.startColor = newColor;
-
-			if (_towerDestructed == RequiredTowerDestruct)
-				SetFireMode(true);
-		}
-		else if (other.gameObject.CompareTag("Enemy") || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+		if (other.gameObject.CompareTag("Enemy") || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
 			if (_towerDestructed > 0)
 			{
@@ -67,6 +56,18 @@ public class FireModificatorBehaviour : MonoBehaviour
 			}
 			_towerDestructed = 0;
 		}
+
+		if (other.gameObject.CompareTag("TowerDestructor"))
+		{
+			++_towerDestructed;
+
+			Color newColor = Color.Lerp(_standartColor, FireColor, _towerDestructed * (1f / RequiredTowerDestruct));
+			_meshRenderer.material.color = newColor;
+			_trailRenderer.startColor = newColor;
+
+			if (_towerDestructed == RequiredTowerDestruct)
+				SetFireMode(true);
+		}
 	}
 	//--------------------------------------------------------------------------
 
@@ -82,7 +83,8 @@ public class FireModificatorBehaviour : MonoBehaviour
 		else
 			_particleSystem.Stop();
 
-		_modeChangedEvent.Invoke(mode);
+		if (!GetComponent<ShieldModificatorBehaviour>())
+			_modeChangedEvent.Invoke(mode);
 	}
 	//--------------------------------------------------------------------------
 

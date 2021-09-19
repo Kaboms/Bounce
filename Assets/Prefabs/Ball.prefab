@@ -9828,6 +9828,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  RotateSpeed: 1.5
 --- !u!114 &1361291597
 MonoBehaviour:
   m_ObjectHideFlags: 0

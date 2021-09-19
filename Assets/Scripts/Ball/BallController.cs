@@ -31,6 +31,8 @@ public class BallController : MonoBehaviour
 
 	private float _mouseXPreviousPos;
 	private bool _mousePress = false;
+
+	private int GroundLayer;
 	//--------------------------------------------------------------------------
 
 	private void Awake()
@@ -47,6 +49,8 @@ public class BallController : MonoBehaviour
 		_immortalDisableTimer = gameObject.AddComponent<Timer>();
 		_immortalDisableTimer.Init(0.5f, false, Timer.EmitType.OneShot);
 		_immortalDisableTimer.AddListener(DisableImmortal);
+
+		GroundLayer = LayerMask.NameToLayer("Ground"); ;
 	}
 	//--------------------------------------------------------------------------
 
@@ -85,7 +89,7 @@ public class BallController : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+		if (other.gameObject.layer == GroundLayer)
 		{
 			_grounded = true;
 			_rigidbody.velocity = Vector3.zero;

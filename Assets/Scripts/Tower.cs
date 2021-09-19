@@ -47,7 +47,7 @@ public class Tower : MonoBehaviour
 
 		GameObject towerDestructorObject = Instantiate(DestructorPrefab);
 		towerDestructorObject.transform.SetParent(transform);
-		towerDestructorObject.transform.localPosition = new Vector3(0, -1.5f, 0);
+		towerDestructorObject.transform.localPosition = new Vector3(0, -2f, 0);
 
 		TowerDestructor towerDestructor = towerDestructorObject.GetComponent<TowerDestructor>();
 		towerDestructor.DestructorEnter.AddListener(OnDestructorTriggered);
