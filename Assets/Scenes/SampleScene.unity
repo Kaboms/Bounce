@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: e29fb93f25737ce4f998e20e5f7a90bd,
+    type: 2}
   m_LightingSettings: {fileID: 376333196}
 --- !u!196 &4
 NavMeshSettings:
@@ -943,6 +944,18 @@ PrefabInstance:
       propertyPath: DeathEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1947025448, guid: 11d4f5a76bfece647b4483dc1631a4cb, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947025448, guid: 11d4f5a76bfece647b4483dc1631a4cb, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947025448, guid: 11d4f5a76bfece647b4483dc1631a4cb, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2049517773, guid: 11d4f5a76bfece647b4483dc1631a4cb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1011,6 +1024,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199462812687335934, guid: 11d4f5a76bfece647b4483dc1631a4cb,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.23147833
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199462812687335934, guid: 11d4f5a76bfece647b4483dc1631a4cb,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.38426083
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199462812687335934, guid: 11d4f5a76bfece647b4483dc1631a4cb,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11d4f5a76bfece647b4483dc1631a4cb, type: 3}
