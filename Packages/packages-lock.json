@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.kaboms.core-features": {
+      "version": "file:D:/Programming/UnityProjects/CoreFeatures ",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "1.7.1",
       "depth": 0,

@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using CoreFeatures.MessageBus;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -30,6 +31,8 @@ public class TowerController : MonoBehaviour
 		_spawnPosition = Vector3.zero;
 
 		Colors = Tuple.Create<Color, Color>(Random.ColorHSV(0f, 1f), Random.ColorHSV(0f, 1f));
+
+		MessageBus.GetInstance().Subsribe("TowerDestructed", OnTowerDestructed);
 	}
 	//--------------------------------------------------------------------------
 
@@ -59,12 +62,10 @@ public class TowerController : MonoBehaviour
 
 		Tower tower = cylinder.GetComponent<Tower>();
 		tower.Init(color, _towerCount * 0.001f);
-		tower.DestructorEnter.AddListener(OnTowerDestruct);
-		tower.DestructorEnter.AddListener(ScoreController.OnTowerDectructed);
 	}
 	//--------------------------------------------------------------------------
 
-	private void OnTowerDestruct()
+	private void OnTowerDestructed(Message message)
 	{
 		SpawnTower();
 

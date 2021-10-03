@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CoreFeatures.MessageBus;
 
 public class ScoreController : MonoBehaviour
 {
@@ -11,7 +12,13 @@ public class ScoreController : MonoBehaviour
 	private int _score = 0;
 	//--------------------------------------------------------------------------
 
-	public void OnTowerDectructed()
+	private void Awake()
+	{
+		MessageBus.GetInstance().Subsribe("TowerDestructed", OnTowerDectructed);
+	}
+	//--------------------------------------------------------------------------
+
+	public void OnTowerDectructed(Message message)
 	{
 		++_score;
 		Score.text = _score.ToString();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using CoreFeatures.MessageBus;
 
 /// <summary>
 /// Contains and generates triangular platforms.
@@ -16,8 +17,6 @@ public class Tower : MonoBehaviour
 	public GameObject EnemyWallPrefab;
 
 	public List<GameObject> Modificators;
-
-	public UnityEvent DestructorEnter { get; private set; } = new UnityEvent();
 
 	private MeshRenderer _meshRenderer;
 
@@ -56,7 +55,7 @@ public class Tower : MonoBehaviour
 
 	public void OnDestructorTriggered()
 	{
-		DestructorEnter.Invoke();
+		MessageBus.GetInstance().Invoke("TowerDestructed", new Message { Sender = gameObject });
 
 		foreach (Transform child in transform)
 		{
