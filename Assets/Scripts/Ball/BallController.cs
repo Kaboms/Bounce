@@ -25,8 +25,6 @@ public class BallController : MonoBehaviour
 
     private const float _cameraVerticalOffset = 3;
 
-    private bool _gameOver = false;
-
     private float _mouseXPreviousPos;
     private bool _mousePress = false;
 
@@ -47,7 +45,7 @@ public class BallController : MonoBehaviour
 
     private void Update()
     {
-        if (_gameOver && Input.GetMouseButtonDown(0))
+        if (GameManager.GetInstance().IsGameOver && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             return;
@@ -62,7 +60,7 @@ public class BallController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_gameOver)
+        if (GameManager.GetInstance().IsGameOver)
             return;
 
         MotionControl();
@@ -135,7 +133,6 @@ public class BallController : MonoBehaviour
 
         _particleSystem.Play(false);
 
-        _gameOver = true;
         _rigidbody.velocity = Vector3.zero;
 
         GetComponent<MeshRenderer>().enabled = false;

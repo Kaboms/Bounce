@@ -1,8 +1,9 @@
 using CoreFeatures.MessageBus;
+using CoreFeatures.Singleton;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : Singleton<ScoreManager>
 {
     public Text Score;
     public Text BestScore;
@@ -13,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         MessageBus.GetInstance().Subsribe("TowerDestructed", OnTowerDectructed);
+        GameManager.GetInstance().GameOverEvent.AddListener(OnGameOver);
     }
     //--------------------------------------------------------------------------
 
